@@ -432,15 +432,32 @@ env:
 | `path` | string | ✅ | 檔案路徑 |
 | `template` | string | ✅ | 檔案內容 |
 | `envsubst` | boolean | 選填 | 是否替換環境變數 |
+| `permission` | number | 選填 | 檔案權限（十進位數字，見下表） |
+
+**權限對照表：**
+
+| permission 值 | 八進位 | 讀 | 寫 | 執行 | 適合情境 |
+|---------------|--------|----|----|------|----------|
+| 256 | 0400 | ✅ | ❌ | ❌ | 機密檔案（如密碼） |
+| 420 | 0644 | ✅ | ✅ | ❌ | 一般配置檔案（預設） |
+| 493 | 0755 | ✅ | ✅ | ✅ | 可執行腳本 |
 
 **範例：**
 ```yaml
 configs:
+  # 一般配置檔案
   - path: /app/config.yml
     template: |
       server:
         port: ${PORT}
     envsubst: true
+
+  # 可執行腳本
+  - path: /app/startup.sh
+    permission: 493  # 0755
+    template: |
+      #!/bin/sh
+      exec node server.js
 ```
 
 ### spec.init 欄位

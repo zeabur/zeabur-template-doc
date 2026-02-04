@@ -372,6 +372,7 @@ services:
   - name: app
     spec:
       configs:
+        # 一般配置檔案
         - path: /app/config/app.yml
           template: |
             server:
@@ -380,13 +381,20 @@ services:
             database:
               url: ${DATABASE_URL}
           envsubst: true  # 啟用環境變數替換
+
+        # 可執行腳本（需設定 permission: 493 = 0755）
+        - path: /app/startup.sh
+          permission: 493
+          template: |
+            #!/bin/sh
+            exec node server.js
 ```
 
 **適合：**
 - 應用程式配置檔案
 - Nginx 配置
 - 證書檔案
-- 腳本檔案
+- 腳本檔案（記得加 `permission: 493`）
 
 #### 場景 3: 動態生成檔案（✅ 使用 init）
 

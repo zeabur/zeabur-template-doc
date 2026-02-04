@@ -300,6 +300,7 @@ services:
 ```yaml
 spec:
   configs:
+    # 一般配置檔案
     - path: /app/config.yml
       template: |
         server:
@@ -308,7 +309,16 @@ spec:
         database:
           url: ${DATABASE_URL}
       envsubst: true    # 啟用變數替換
+
+    # 可執行腳本
+    - path: /app/startup.sh
+      permission: 493   # 0755，可執行
+      template: |
+        #!/bin/sh
+        exec node server.js
 ```
+
+> **permission 值：** 493 (0755) 可執行、420 (0644) 一般檔案、256 (0400) 唯讀
 
 ### 初始化腳本 (init)
 

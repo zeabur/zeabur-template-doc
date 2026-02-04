@@ -760,6 +760,7 @@ spec:
         database:
           url: ${DATABASE_URL}
       envsubst: true
+      # permission: 493  # 如果是腳本檔案，設定 0755 使其可執行
 ```
 
 ---

@@ -233,10 +233,19 @@ spec:
           url: ${DATABASE_URL}
       envsubst: true  # 啟用環境變數替換
 
+    # 如果是腳本檔案，需設定 permission
+    - path: /app/startup.sh
+      permission: 493  # 0755，可執行
+      template: |
+        #!/bin/sh
+        exec node server.js
+
   volumes:
     - id: data
       dir: /app/data  # 用於執行時產生的資料
 ```
+
+> **權限提示：** `permission` 使用十進位數字：493 (0755) 可執行、420 (0644) 一般檔案、256 (0400) 唯讀機密檔案
 
 **方法 2: 使用 `init` 腳本建立檔案**
 
