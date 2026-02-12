@@ -221,6 +221,8 @@ spec:
       A brief description of your service
     icon: https://example.com/icon.svg
     coverImage: https://example.com/cover.webp
+    video:
+      - https://example.com/demo.mp4
     tags:
       - Database
     variables: []
@@ -290,6 +292,7 @@ spec:
 | `description` | 建議 | 服務簡介（1-3 句話）| 使用 `\|` 可多行 |
 | `icon` | 建議 | 圖示 URL | SVG 或 PNG |
 | `coverImage` | 選填 | 封面圖片 URL | WebP 格式 |
+| `video` | 選填 | 封面影片 URL 列表 | 陣列格式 |
 | `tags` | 建議 | 分類標籤 | 陣列格式 |
 
 ### 3.3 選擇合適的標籤
@@ -337,10 +340,18 @@ coverImage: https://raw.githubusercontent.com/username/zeabur-template/main/my-s
 # coverImage: ./screenshot.webp
 ```
 
+**封面影片（video）：**
+
+```yaml
+# ✅ 正確：使用完整的 HTTPS URL 陣列
+video:
+  - https://example.com/demo.mp4
+```
+
 **重要提醒：**
 - 必須使用完整的 HTTPS URL
 - 不支援相對路徑（如 `./screenshot.webp`）
-- 圖片必須上傳到可公開存取的位置（如 GitHub）
+- 圖片和影片必須上傳到可公開存取的位置（如 GitHub）
 
 ### ✅ 基本資訊檢查清單
 

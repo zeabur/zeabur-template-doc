@@ -26,6 +26,8 @@ spec:
     Service description
   icon: https://example.com/icon.svg
   coverImage: https://example.com/cover.webp
+  video:
+    - https://example.com/demo.mp4
   tags:
     - Category
   variables:
@@ -35,9 +37,13 @@ spec:
       description: Description
   readme: |
     # README content
-  resourceUsage:
-    cpu: 0.5
-    memory: 512
+  resourceRequirement:
+    minConfig:
+      cpu: 2
+      ram: 2
+    recommendedConfig:
+      cpu: 4
+      ram: 8
   services:
     - name: service-name
       icon: https://example.com/icon.svg
@@ -320,10 +326,11 @@ metadata:
 | `description` | string | 建議 | 模板描述（支援多行） |
 | `icon` | string | 建議 | 圖示 URL |
 | `coverImage` | string | 選填 | 封面圖片 URL |
+| `video` | array | 選填 | 封面影片 URL 列表 |
 | `tags` | array | 建議 | 分類標籤 |
 | `variables` | array | 選填 | 使用者變數 |
 | `readme` | string | 建議 | README 內容（Markdown） |
-| `resourceUsage` | object | 選填 | 預期資源使用量 |
+| `resourceRequirement` | object | 選填 | 資源需求（最低與建議配置） |
 | `services` | array | ✅ | 服務列表 |
 
 ### variables 欄位
@@ -497,19 +504,30 @@ spec:
     - server.js
 ```
 
-### resourceUsage 欄位
+### resourceRequirement 欄位
 
-| 欄位 | 類型 | 說明 | 預設 |
-|------|------|------|------|
-| `cpu` | number | vCPU 數量 | 0.5 |
-| `memory` | number | 記憶體（MiB） | 512 |
+| 欄位 | 類型 | 說明 |
+|------|------|------|
+| `minConfig` | object | 最低資源配置 |
+| `recommendedConfig` | object | 建議資源配置 |
+
+**minConfig / recommendedConfig 子欄位：**
+
+| 欄位 | 類型 | 說明 |
+|------|------|------|
+| `cpu` | number | vCPU 核心數 |
+| `ram` | number | 記憶體（GiB） |
 
 **範例：**
 ```yaml
 spec:
-  resourceUsage:
-    cpu: 1
-    memory: 1024
+  resourceRequirement:
+    minConfig:
+      cpu: 2
+      ram: 2
+    recommendedConfig:
+      cpu: 4
+      ram: 8
 ```
 
 ---

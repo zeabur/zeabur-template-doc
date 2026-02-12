@@ -598,8 +598,13 @@ Error: JavaScript heap out of memory
 解決：
 ```yaml
 spec:
-  resourceUsage:
-    memory: 2048  # 增加記憶體限制 (MiB)
+  resourceRequirement:
+    minConfig:
+      cpu: 2
+      ram: 2
+    recommendedConfig:
+      cpu: 4
+      ram: 8
 ```
 
 ---

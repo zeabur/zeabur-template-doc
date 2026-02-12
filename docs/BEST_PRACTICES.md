@@ -885,19 +885,23 @@ init:
         # 會拖慢啟動時間
 ```
 
-### 3. 合理的資源限制
+### 3. 合理的資源需求
 
 ```yaml
 spec:
-  resourceUsage:
-    cpu: 0.5      # vCPU
-    memory: 512   # MiB
+  resourceRequirement:
+    minConfig:
+      cpu: 2        # vCPU 核心數
+      ram: 2        # GiB
+    recommendedConfig:
+      cpu: 4        # vCPU 核心數
+      ram: 8        # GiB
 ```
 
 **建議：**
-- 小型服務：0.5 CPU, 512MB
-- 中型服務：1 CPU, 1024MB
-- 大型服務：2 CPU, 2048MB+
+- 小型服務：minConfig 1 CPU / 1 GiB，recommendedConfig 2 CPU / 2 GiB
+- 中型服務：minConfig 2 CPU / 2 GiB，recommendedConfig 4 CPU / 8 GiB
+- 大型服務：minConfig 4 CPU / 4 GiB，recommendedConfig 8 CPU / 16 GiB
 
 ---
 

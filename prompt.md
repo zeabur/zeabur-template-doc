@@ -19,6 +19,8 @@ spec:
     English description (1-3 sentences)
   icon: https://example.com/icon.svg
   coverImage: https://example.com/cover.webp
+  video:
+    - https://example.com/demo.mp4
   tags:
     - Category
   variables: []

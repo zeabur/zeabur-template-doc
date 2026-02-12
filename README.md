@@ -48,6 +48,8 @@ spec:
     description: 模板描述
     icon: 圖示 URL
     coverImage: 封面圖片 URL
+    video:
+      - 封面影片 URL
     variables: []
     services: []
 localization:
