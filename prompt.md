@@ -277,6 +277,12 @@ spec:
       type: STRING
       name: API Key
       description: Your API key for the service
+
+    # AI Hub API Key 變數
+    - key: ZEABUR_AI_HUB_API_KEY
+      type: AI_HUB_KEY
+      name: Zeabur AI Hub API Key
+      description: Your Zeabur AI Hub API key for using AI models via AI Hub
 ```
 
 ### 綁定網域

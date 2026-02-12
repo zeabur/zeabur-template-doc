@@ -1235,6 +1235,22 @@ variables:
 - 應用名稱
 - 其他自訂設定
 
+#### AI_HUB_KEY 類型
+
+用於讓使用者在部署時產生或輸入 Zeabur AI Hub API Key：
+
+```yaml
+variables:
+  - key: ZEABUR_AI_HUB_API_KEY
+    type: AI_HUB_KEY
+    name: Zeabur AI Hub API Key
+    description: Your Zeabur AI Hub API key for using AI models via AI Hub
+```
+
+**使用場景：**
+- 需要透過 Zeabur AI Hub 使用 AI 模型（如 GPT、Claude、Gemini、DeepSeek 等）的服務
+- 部署時 UI 會提供產生 API Key 的入口，使用者也可以稍後在環境變數中補填
+
 ### 6.3 使用者變數範例
 
 ```yaml
@@ -1286,7 +1302,7 @@ services:
 ### ✅ 使用者變數檢查清單
 
 - [ ] `key` 使用大寫和底線（如 `PUBLIC_DOMAIN`）
-- [ ] `type` 正確（`DOMAIN` 或 `STRING`）
+- [ ] `type` 正確（`DOMAIN`、`STRING` 或 `AI_HUB_KEY`）
 - [ ] `name` 清楚易懂（顯示給使用者的標題）
 - [ ] `description` 說明清楚（包含格式要求）
 - [ ] DOMAIN 變數有對應的 `domainKey` 設定

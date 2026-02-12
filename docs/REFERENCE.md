@@ -32,7 +32,7 @@ spec:
     - Category
   variables:
     - key: VARIABLE_NAME
-      type: STRING|DOMAIN
+      type: STRING|DOMAIN|AI_HUB_KEY
       name: Display Name
       description: Description
   readme: |
@@ -338,7 +338,7 @@ metadata:
 | 欄位 | 類型 | 必填 | 說明 |
 |------|------|------|------|
 | `key` | string | ✅ | 變數鍵名（大寫底線） |
-| `type` | enum | ✅ | `DOMAIN` 或 `STRING` |
+| `type` | enum | ✅ | `DOMAIN`、`STRING` 或 `AI_HUB_KEY` |
 | `name` | string | ✅ | 顯示名稱 |
 | `description` | string | ✅ | 變數描述 |
 
@@ -353,6 +353,10 @@ variables:
     type: STRING
     name: Admin Password
     description: Password for the admin user
+  - key: ZEABUR_AI_HUB_API_KEY
+    type: AI_HUB_KEY
+    name: Zeabur AI Hub API Key
+    description: Your Zeabur AI Hub API key for using AI models via AI Hub
 ```
 
 ### services 欄位

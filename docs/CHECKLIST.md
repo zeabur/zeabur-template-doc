@@ -185,7 +185,7 @@ curl -I https://example.com/icon.svg
 
 - [ ] `variables` 定義正確
 - [ ] `key` 使用大寫底線（如 `PUBLIC_DOMAIN`）
-- [ ] `type` 正確（`DOMAIN` 或 `STRING`）
+- [ ] `type` 正確（`DOMAIN`、`STRING` 或 `AI_HUB_KEY`）
 - [ ] `name` 和 `description` 清楚易懂
 - [ ] DOMAIN 變數有對應的 `domainKey` 設定
 
