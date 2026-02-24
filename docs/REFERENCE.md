@@ -79,7 +79,6 @@ spec:
           ENV_VAR:
             default: value
             expose: true
-            readonly: true
 localization:
   zh-TW:
     description: |
@@ -135,17 +134,14 @@ services:
         # web 埠的完整 URL
         APP_URL:
           default: ${ZEABUR_WEB_URL}
-          readonly: true
 
         # api 埠的完整 URL
         API_URL:
           default: ${ZEABUR_API_URL}
-          readonly: true
 
         # 只需要網域（不含 https://）
         DOMAIN:
           default: ${ZEABUR_WEB_DOMAIN}
-          readonly: true
 ```
 
 ### 埠號相關變數
@@ -205,12 +201,10 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
 
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 
   - name: app
     dependencies:
@@ -220,7 +214,6 @@ services:
         # 使用資料庫變數
         DATABASE_URL:
           default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-          readonly: true
 ```
 
 ### 密碼生成
@@ -270,7 +263,6 @@ env:
 env:
   APP_URL:
     default: ${ZEABUR_WEB_URL}
-    readonly: true
 
 # ❌ 錯誤：使用使用者變數
 env:
@@ -422,14 +414,12 @@ volumes:
 |------|------|------|------|
 | `default` | string | ✅ | 預設值（可使用變數） |
 | `expose` | boolean | 選填 | 是否暴露給其他服務 |
-| `readonly` | boolean | 選填 | 是否唯讀 |
 
 **範例：**
 ```yaml
 env:
   DATABASE_URL:
     default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-    readonly: true
 
   ADMIN_PASSWORD:
     default: ${PASSWORD}

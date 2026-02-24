@@ -97,7 +97,6 @@ localization:
 # ✅ 正確：使用 ZEABUR_WEB_URL
 APP_URL:
   default: ${ZEABUR_WEB_URL}
-  readonly: true
 
 # ❌ 錯誤：不要使用 PUBLIC_DOMAIN 組合 URL
 APP_URL:
@@ -149,15 +148,12 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
         POSTGRES_CONNECTION_STRING:
           default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
           expose: true
-          readonly: true
 ```
 
 ### MySQL/MariaDB 標準配置
@@ -187,11 +183,9 @@ services:
         MYSQL_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
         MYSQL_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 ```
 
 ### Redis 標準配置
@@ -215,25 +209,23 @@ services:
         REDIS_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
         REDIS_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 ```
 
 ---
 
 ## 環境變數規則
 
-### expose 和 readonly 使用時機
+### expose 使用時機
 
-| 情況 | expose | readonly |
-|-----|--------|----------|
-| 需要被其他服務引用 | `true` | - |
-| 系統自動生成的值 | `true` | `true` |
-| 使用者可修改的設定 | `true` | - |
-| 僅內部使用 | - | - |
+| 情況 | expose |
+|-----|--------|
+| 需要被其他服務引用 | `true` |
+| 系統自動生成的值 | `true` |
+| 使用者可修改的設定 | `true` |
+| 僅內部使用 | - |
 
 ### 服務依賴配置
 
@@ -245,7 +237,6 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true           # ← 必須暴露
-          readonly: true
 
   - name: app
     dependencies:
@@ -254,7 +245,6 @@ services:
       env:
         DATABASE_URL:
           default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-          readonly: true
 ```
 
 ---
@@ -458,7 +448,7 @@ icon: https://raw.githubusercontent.com/zeabur/service-icons/main/marketplace/mi
 ### 環境變數檢查
 - [ ] 密碼使用 `${PASSWORD}`
 - [ ] URL 使用 `${ZEABUR_WEB_URL}`
-- [ ] 連接資訊有 `expose: true` 和 `readonly: true`
+- [ ] 連接資訊有 `expose: true`
 - [ ] 引用其他服務的服務有 `dependencies`
 
 ### 資料庫檢查
@@ -503,7 +493,6 @@ APP_URL:
 # 正確
 APP_URL:
   default: ${ZEABUR_WEB_URL}
-  readonly: true
 ```
 
 ### ❌ 忘記 expose
@@ -517,7 +506,6 @@ POSTGRES_HOST:
 POSTGRES_HOST:
   default: ${CONTAINER_HOSTNAME}
   expose: true
-  readonly: true
 ```
 
 ### ❌ 忘記 dependencies

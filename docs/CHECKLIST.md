@@ -91,7 +91,6 @@
 ### URL 配置
 
 - [ ] 🔴 **重要：** 應用 URL 使用 `${ZEABUR_WEB_URL}`，不是 `${PUBLIC_DOMAIN}`
-- [ ] URL 相關變數設為 `readonly: true`
 - [ ] OAuth callback URLs 使用完整 URL
 
 **檢查範例：**
@@ -100,7 +99,6 @@
 env:
   APP_URL:
     default: ${ZEABUR_WEB_URL}
-    readonly: true
 
 # ❌ 錯誤
 env:
@@ -111,7 +109,7 @@ env:
 ### 服務間連接
 
 - [ ] 連接資訊變數（HOST, PORT）使用 `${CONTAINER_HOSTNAME}` 和 `${PORT}`
-- [ ] 連接資訊變數設為 `expose: true` 和 `readonly: true`
+- [ ] 連接資訊變數設為 `expose: true`
 - [ ] 所有引用其他服務變數的服務都有設定 `dependencies`
 - [ ] 資料庫連接字串正確組合
 
@@ -125,11 +123,9 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true  # ← 必須有
-          readonly: true
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 
 # 應用服務
   - name: app
@@ -139,7 +135,6 @@ services:
       env:
         DATABASE_URL:
           default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-          readonly: true
 ```
 
 ### Volume 配置

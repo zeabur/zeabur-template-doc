@@ -100,7 +100,6 @@ ports:
 | `KEY: value` | `KEY:\n  default: value` |
 | `KEY: ${VAR}` | `KEY:\n  default: ${VAR}` |
 | N/A | `expose: true` (新增：暴露給其他服務) |
-| N/A | `readonly: true` (新增：唯讀) |
 
 ### 埠號映射
 
@@ -213,12 +212,10 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
 
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 ```
 
 ### 步驟 5: 處理依賴關係
@@ -263,11 +260,9 @@ services:
       env:
         DATABASE_URL:
           default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-          readonly: true
 
         REDIS_URL:
           default: redis://${REDIS_HOST}:${REDIS_PORT}
-          readonly: true
 ```
 
 ### 步驟 7: 測試部署
@@ -340,12 +335,10 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
 
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 ```
 
 ### 範例 2: Redis
@@ -394,12 +387,10 @@ services:
         REDIS_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
 
         REDIS_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 ```
 
 ### 範例 3: Twenty CRM（多服務）
@@ -501,11 +492,9 @@ spec:
             POSTGRES_HOST:
               default: ${CONTAINER_HOSTNAME}
               expose: true
-              readonly: true
             POSTGRES_PORT:
               default: ${DATABASE_PORT}
               expose: true
-              readonly: true
 
       # Redis 快取
       - name: redis
@@ -526,11 +515,9 @@ spec:
             REDIS_HOST:
               default: ${CONTAINER_HOSTNAME}
               expose: true
-              readonly: true
             REDIS_PORT:
               default: ${DATABASE_PORT}
               expose: true
-              readonly: true
 
       # Server 服務
       - name: server
@@ -556,15 +543,12 @@ spec:
 
             PG_DATABASE_URL:
               default: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-              readonly: true
 
             REDIS_URL:
               default: redis://${REDIS_HOST}:${REDIS_PORT}
-              readonly: true
 
             SERVER_URL:
               default: ${ZEABUR_WEB_URL}
-              readonly: true
 
             APP_SECRET:
               default: ${PASSWORD}
@@ -589,15 +573,12 @@ spec:
           env:
             PG_DATABASE_URL:
               default: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-              readonly: true
 
             REDIS_URL:
               default: redis://${REDIS_HOST}:${REDIS_PORT}
-              readonly: true
 
             SERVER_URL:
               default: ${ZEABUR_WEB_URL}
-              readonly: true
 
             DISABLE_DB_MIGRATIONS:
               default: "true"
@@ -607,7 +588,6 @@ spec:
 
             APP_SECRET:
               default: ${APP_SECRET}
-              readonly: true
 ```
 
 ---
@@ -787,7 +767,6 @@ spec:
 - [ ] 連接資訊使用 `${CONTAINER_HOSTNAME}` 和 `${PORT}`
 - [ ] URL 使用 `${ZEABUR_WEB_URL}`，不是 `${PUBLIC_DOMAIN}`
 - [ ] 需要暴露的變數設為 `expose: true`
-- [ ] 唯讀變數設為 `readonly: true`
 
 ### 測試階段
 - [ ] 本地 Schema 驗證通過
@@ -840,7 +819,6 @@ env:
   # 原始: postgres://user:pass@db:5432/mydb
   DATABASE_URL:
     default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-    readonly: true
 ```
 
 ---

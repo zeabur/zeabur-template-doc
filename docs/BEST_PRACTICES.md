@@ -112,11 +112,7 @@ env:
    - 只暴露必要的變數
    - 內部使用的變數不需要 `expose: true`
 
-2. **唯讀保護**
-   - 自動生成的值設為 `readonly: true`
-   - 防止使用者誤改導致服務異常
-
-3. **明確的預設值**
+2. **明確的預設值**
    - 提供合理的預設值
    - 避免空值或不明確的預設值
 
@@ -142,26 +138,22 @@ services:
           default: postgres
           expose: true
 
-        # 連接資訊（唯讀，供其他服務使用）
+        # 連接資訊（供其他服務使用）
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
 
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 
-        # 連接字串（唯讀，方便使用）
+        # 連接字串（方便使用）
         POSTGRES_CONNECTION_STRING:
           default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
           expose: true
-          readonly: true
 ```
 
 **優點：**
-- ✅ 清楚區分可修改和唯讀變數
 - ✅ 提供多種連接方式（分開的變數 + 連接字串）
 - ✅ 使用 Zeabur 內建變數確保正確性
 
@@ -258,27 +250,22 @@ services:
         # 完整 URL（含 https://）
         APP_URL:
           default: ${ZEABUR_WEB_URL}
-          readonly: true
 
         # 前端環境變數
         NEXT_PUBLIC_URL:
           default: ${ZEABUR_WEB_URL}
-          readonly: true
 
         # API endpoint
         API_ENDPOINT:
           default: ${ZEABUR_WEB_URL}/api
-          readonly: true
 
         # OAuth callback
         OAUTH_CALLBACK_URL:
           default: ${ZEABUR_WEB_URL}/auth/callback
-          readonly: true
 ```
 
 **重點：**
 - ✅ 使用 `${ZEABUR_WEB_URL}` 而非 `${PUBLIC_DOMAIN}`
-- ✅ 所有 URL 相關變數都設為 `readonly`
 - ✅ 為不同用途提供專門的變數
 
 ### 模式 3: 多服務環境變數共享
@@ -319,7 +306,6 @@ services:
 每個環境變數都應該考慮：
 
 - [ ] 是否需要暴露給其他服務？（`expose: true`）
-- [ ] 是否應該唯讀？（`readonly: true`）
 - [ ] 預設值是否合理？
 - [ ] 是否使用了正確的 Zeabur 內建變數？
 - [ ] 變數名稱是否清楚易懂？
@@ -820,7 +806,6 @@ env:
   POSTGRES_HOST:
     default: ${CONTAINER_HOSTNAME}
     expose: true
-    readonly: true
 
   # 僅內部使用 → 不 expose
   INTERNAL_DEBUG_MODE:
@@ -918,7 +903,6 @@ services:
         # Must match the URL configured in OAuth provider
         OAUTH_CALLBACK_URL:
           default: ${ZEABUR_WEB_URL}/auth/callback
-          readonly: true
 ```
 
 ### 2. 使用 YAML 錨點避免重複
@@ -929,11 +913,9 @@ x-database-env: &database-env
   POSTGRES_HOST:
     default: ${CONTAINER_HOSTNAME}
     expose: true
-    readonly: true
   POSTGRES_PORT:
     default: ${DATABASE_PORT}
     expose: true
-    readonly: true
 
 # 重複使用
 services:
@@ -1029,7 +1011,6 @@ spec:
 - [ ] 密碼使用 `${PASSWORD}`
 - [ ] URL 使用 `${ZEABUR_WEB_URL}`
 - [ ] 連接資訊正確暴露
-- [ ] 唯讀變數設為 `readonly`
 
 ### 資源
 - [ ] 所有圖片 URL 可存取

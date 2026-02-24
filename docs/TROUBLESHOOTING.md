@@ -123,7 +123,6 @@ services:
       env:
         APP_URL:
           default: ${ZEABUR_WEB_URL}  # 完整 URL: https://myapp.zeabur.app
-          readonly: true
 ```
 
 #### 說明
@@ -359,16 +358,13 @@ services:
         # 應用程式需要知道自己的完整 URL
         APP_URL:
           default: ${ZEABUR_WEB_URL}  # ✅ 完整 URL
-          readonly: true
 
         NEXT_PUBLIC_URL:
           default: ${ZEABUR_WEB_URL}  # ✅ 完整 URL
-          readonly: true
 
         # OAuth callback 範例
         OAUTH_CALLBACK_URL:
           default: ${ZEABUR_WEB_URL}/auth/callback  # ✅ 完整 URL
-          readonly: true
 ```
 
 #### 變數對照表
@@ -636,7 +632,6 @@ FATAL: database "xxx" does not exist
      DATABASE_URL:
        # 格式: postgresql://USER:PASSWORD@HOST:PORT/DATABASE
        default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-       readonly: true
    ```
 
 3. **確認資料庫服務已啟動**
@@ -695,7 +690,6 @@ services:
       env:
         REDIS_URL:
           default: redis://${REDIS_HOST}:${REDIS_PORT}  # ← 使用暴露的變數
-          readonly: true
 ```
 
 #### 常見錯誤

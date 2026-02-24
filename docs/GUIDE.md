@@ -446,12 +446,10 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
 
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 ```
 
 **欄位詳解：**
@@ -821,12 +819,10 @@ services:
         # 使用資料庫連接資訊
         DATABASE_URL:
           default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-          readonly: true
 
         # 使用 Zeabur 提供的完整 URL
         APP_URL:
           default: ${ZEABUR_WEB_URL}
-          readonly: true
 ```
 
 ### 4.6 服務依賴關係
@@ -921,7 +917,6 @@ env:
   VARIABLE_NAME:
     default: value      # 預設值
     expose: true        # 是否暴露給其他服務（選填）
-    readonly: true      # 是否唯讀（選填）
 ```
 
 ### 5.2 環境變數類型
@@ -953,22 +948,7 @@ env:
 - `${CONTAINER_HOSTNAME}`：服務的內部主機名稱
 - `${PORT}`：服務的預設埠號
 
-#### 類型 3: 唯讀變數（readonly）
-
-```yaml
-env:
-  POSTGRES_HOST:
-    default: ${CONTAINER_HOSTNAME}
-    expose: true
-    readonly: true    # 使用者無法修改
-```
-
-**用途：**
-- 服務間連接資訊
-- 自動生成的 URL
-- 系統提供的值
-
-#### 類型 4: 內部變數（不暴露）
+#### 類型 3: 內部變數（不暴露）
 
 ```yaml
 env:
@@ -1003,12 +983,10 @@ services:
         POSTGRES_HOST:
           default: ${CONTAINER_HOSTNAME}
           expose: true
-          readonly: true
 
         POSTGRES_PORT:
           default: ${DATABASE_PORT}
           expose: true
-          readonly: true
 ```
 
 #### 模式 2: 應用服務 URL
@@ -1027,7 +1005,6 @@ env:
   APP_URL:
     default: ${ZEABUR_WEB_URL}
     # Zeabur 自動提供完整 URL，如 https://myapp.zeabur.app
-    readonly: true
 ```
 
 **Zeabur URL 變數：**
@@ -1047,12 +1024,10 @@ env:
   # 方法 1: 直接組合
   DATABASE_URL:
     default: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-    readonly: true
 
   # 方法 2: 使用 Zeabur 提供的連接字串（如果有）
   DATABASE_URL:
     default: ${POSTGRES_CONNECTION_STRING}
-    readonly: true
 ```
 
 ### 5.4 引用其他服務的環境變數
@@ -1081,7 +1056,6 @@ services:
 
 - [ ] 所有必要的環境變數都已定義
 - [ ] 密碼使用 `${PASSWORD}` 自動生成
-- [ ] 連接資訊變數設為 `readonly: true`
 - [ ] URL 使用 `${ZEABUR_WEB_URL}`，不是 `${PUBLIC_DOMAIN}`
 - [ ] 需要被其他服務使用的變數設為 `expose: true`
 - [ ] 依賴服務已在 `dependencies` 中聲明
@@ -1127,7 +1101,6 @@ env:
 env:
   APP_URL:
     default: ${ZEABUR_WEB_URL}  # 完整 URL: https://myapp.zeabur.app
-    readonly: true
 ```
 
 ❌ **錯誤 2: 忘記設定 expose**
@@ -1287,16 +1260,13 @@ services:
         # 使用字串變數
         ADMIN_PASSWORD:
           default: ${ADMIN_PASSWORD}
-          readonly: true
 
         APP_NAME:
           default: ${APP_NAME}
-          readonly: true
 
         # 使用完整 URL（不是 PUBLIC_DOMAIN！）
         APP_URL:
           default: ${ZEABUR_WEB_URL}
-          readonly: true
 ```
 
 ### ✅ 使用者變數檢查清單
